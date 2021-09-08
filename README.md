@@ -10,3 +10,8 @@ Add every minutes cronjob:
 ```
 * * * * * cd /root/ansible-control/ && /usr/local/bin/ansible-playbook ./ipaddr_provisioning.yml > /root/cron_log 2>&1
 ```
+
+Add to nginx.conf
+```
+include /etc/nginx/ip_vhost.d/*.conf;
+```
