@@ -31,6 +31,11 @@
   with_items: "{{ r_query.query_result }}"
   ignore_errors: yes
 
+- name: Create ip_vhost.d directory
+  ansible.builtin.file:
+    path: /etc/nginx/ip_vhost.d
+    state: directory
+
 - name: Create nginx ip_vhost.conf
   template:
     src: ip_vhost.conf.j2
