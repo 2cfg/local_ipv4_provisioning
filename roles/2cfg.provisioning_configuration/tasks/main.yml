@@ -22,9 +22,9 @@
     mode: 0755
   with_items: "{{ r_query.query_result }}"
 
-- name: Add arptables rule
-  shell: "/usr/sbin/arptables -I INPUT -d {{ item.ipaddr }} -j DROP"
-  with_items: "{{ r_query.query_result }}"
+#- name: Add arptables rule
+#  shell: "/usr/sbin/arptables -I INPUT -d {{ item.ipaddr }} -j DROP"
+#  with_items: "{{ r_query.query_result }}"
 
 - name: Add ip address to interface bond0
   shell: "/usr/sbin/ip addr add {{ item.ipaddr }}/32 dev bond0"
@@ -69,6 +69,6 @@
 - name: Update ipaddr local state
   community.mysql.mysql_query:
     login_db: dnsmon
-    query: UPDATE ipaddr_table SET local = 'on' WHERE ipaddr = '{{ item.ipaddr }}'
+    query: UPDATE ipaddr_table SET local = 'on', remote = 'on' WHERE ipaddr = '{{ item.ipaddr }}'
   with_items: "{{ r_query.query_result }}"
 
